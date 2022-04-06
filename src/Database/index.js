@@ -1,7 +1,9 @@
+import dummyData from "../dummyData/foods";
+
 const getUser = () => {
     const existingUser = localStorage.getItem('userId');
     if (existingUser) {
-        return existingUser; 
+        return existingUser;
     } else {
         const newUser = 'user-' + new Date().getTime();
         localStorage.setItem('userId', newUser)
@@ -12,21 +14,59 @@ const getUser = () => {
 
 const getDataKey = () => {
     const userId = getUser();
-    return `red-onion/carts/${userId}`
+    return `moja-pizza/carts/${userId}`
 }
 
 
 // push to local storage: a temporary place for database
 const getDatabaseCart = () => {
     const dataKey = getDataKey();
-    const data = localStorage.getItem(dataKey) || "{}";
+    const data = localStorage.getItem(dataKey) || "[]";
+    console.log(JSON.parse(data));
     return JSON.parse(data);
 }
 
 const addToDatabaseCart = (key, count) => {
-    const currentCart = getDatabaseCart();
-    currentCart[key] = count;
+    let currentCart = getDatabaseCart();
+    console.log(currentCart);
+    var targetItem = currentCart.filter(c => c.key === key)[0]
+    if (targetItem != null) {
+        targetItem.count = count;
+        console.log('targetItem : ',targetItem);
+        console.log('currentCart : ', currentCart);
+    } else {
+        currentCart.push(
+            {
+                key: key,
+                count: count
+            }
+        )
+    }
     localStorage.setItem(getDataKey(), JSON.stringify(currentCart));
+}
+
+const getCartTotal = () =>{
+    const TOTAL_CART_SHIPPING = 15.00;
+    const TOTAL_CART_TAX = 0.05;
+    let currentCart = getDatabaseCart();
+    
+    
+    var subtotal = 0;
+    currentCart.map(c =>{
+        var item = dummyData.find(f=> f.id.toString() === c.key)
+        subtotal += c.count * item.price
+    })
+
+    let tax = subtotal * TOTAL_CART_TAX;
+    let grand_total = subtotal + tax + TOTAL_CART_SHIPPING
+    const cartTotal = {
+        subtotal: subtotal,
+        tax: subtotal * TOTAL_CART_TAX,
+        shipping: TOTAL_CART_SHIPPING,
+        grand_total: grand_total
+    }
+
+    return cartTotal
 }
 
 const removeFromDatabaseCart = key => {
@@ -40,4 +80,4 @@ const clearLocalShoppingOrder = (cart) => {
 }
 
 
-export { addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
+export {getCartTotal,  addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
