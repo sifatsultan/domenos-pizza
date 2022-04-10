@@ -32,8 +32,6 @@ const addToDatabaseCart = (key, count) => {
     var targetItem = currentCart.filter(c => c.key === key)[0]
     if (targetItem != null) {
         targetItem.count = count;
-        console.log('targetItem : ',targetItem);
-        console.log('currentCart : ', currentCart);
     } else {
         currentCart.push(
             {
@@ -71,7 +69,12 @@ const getCartTotal = () =>{
 
 const removeFromDatabaseCart = key => {
     const currentCart = getDatabaseCart();
-    delete currentCart[key];
+    var itemToDelete = currentCart.find((x) => x.key.toString() === key)
+    var index = currentCart.indexOf(itemToDelete)
+    if(index > -1){
+        currentCart.splice(index, 1)
+    }
+    console.log(currentCart);
     localStorage.setItem(getDataKey(), JSON.stringify(currentCart));
 }
 

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Cart.css'
 import dummyData from '../../dummyData/foods';
-import { getCartTotal, getDatabaseCart } from '../../Database';
+import { getCartTotal, getDatabaseCart, removeFromDatabaseCart } from '../../Database';
 
 
 const CartItem = (props) => {
@@ -20,7 +20,7 @@ const CartItem = (props) => {
                 <div className="product-price">{props.price}</div>
                 <div className="product-quantity">{props.qty}</div>
                 <div className="product-removal">
-                    <button className="remove-product">
+                    <button className="remove-product" onClick={()=>{removeFromDatabaseCart(props.id);}}>
                         Remove
                     </button>
                 </div>
@@ -38,7 +38,13 @@ const Cart = () => {
     console.log(databaseCartItems);
     let cartItems = [];
     console.log(foods);
+    const [cartDbItems, setCartDbItems] = useState(databaseCartItems);
 
+    function onRemoveItemHandler(key){
+        var newCartItems = getDatabaseCart();
+        setCartDbItems(newCartItems);
+    }
+    
     databaseCartItems.map(item => {
         let cartItem = dummyData.find(f => f.id.toString() === item.key);
         cartItems.push({
@@ -65,10 +71,12 @@ const Cart = () => {
                 return (
                     <CartItem 
                         key={cartItem.id.toString()} 
+                        id={cartItem.id}
                         title={cartItem.title} 
                         qty={cartItem.qty} 
                         price={cartItem.price} 
                         description={cartItem.description} 
+                        onRemoveItem={()=>{onRemoveItemHandler(cartItem.id)}}
                         image={cartItem.image}>
                     </CartItem>
                 );
