@@ -22,13 +22,11 @@ const getDataKey = () => {
 const getDatabaseCart = () => {
     const dataKey = getDataKey();
     const data = localStorage.getItem(dataKey) || "[]";
-    console.log(JSON.parse(data));
     return JSON.parse(data);
 }
 
 const addToDatabaseCart = (key, count) => {
     let currentCart = getDatabaseCart();
-    console.log(currentCart);
     var targetItem = currentCart.filter(c => c.key === key)[0]
     if (targetItem != null) {
         targetItem.count = count;
