@@ -2,9 +2,28 @@ import React from 'react';
 import logo from '../../Images/logo_dominos.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+
 import './Header.css'
+import { useEffect } from 'react';
+import { getNumberOfCartItems } from '../../Database';
+import { useState } from 'react';
 
 const Header = () => {
+
+
+    const [numberOfCartItems, setNumberOfCartItems] = useState(getNumberOfCartItems());
+
+    useEffect(() => {
+        console.log(numberOfCartItems);
+    })
+
+
+
     return (
         <div>
             {/* <div>
@@ -16,11 +35,14 @@ const Header = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-
                 <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul className="navbar-nav nav_links">
                         <li className="nav-item active">
-                            <a className="nav-link" href="/cart"><FontAwesomeIcon icon={faCartPlus} /><span className="sr-only">(current)</span></a>
+                            <a className="nav-link" href="/cart">
+                                <Badge badgeContent={numberOfCartItems} color="error">
+                                    <ShoppingCartIcon  color="action" />
+                                </Badge>
+                            </a>
                         </li>
                         <li className="nav-item active">
                             <a className="nav-link" href="/login">Login <span className="sr-only">(current)</span></a>
