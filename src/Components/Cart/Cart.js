@@ -64,7 +64,7 @@ const Cart = () => {
         <div className='shopping-cart'>
 
 
-            {cartItems.length > 0 ? <CartHeader></CartHeader> : ''}
+            {cartItems.length > 0 ? <CartHeader></CartHeader> : 'There is nothing in the cart'}
 
             {
                 cartItems.map((cartItem) => {

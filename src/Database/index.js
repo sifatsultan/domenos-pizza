@@ -41,6 +41,15 @@ const addToDatabaseCart = (key, count) => {
     localStorage.setItem(getDataKey(), JSON.stringify(currentCart));
 }
 
+const getNumberOfCartItems = () => {
+    let currentCart = getDatabaseCart();
+    if(currentCart == null)
+        return 0
+    else{
+        return currentCart.length;
+    }
+}
+
 const getCartTotal = () =>{
     const TOTAL_CART_SHIPPING = 15.00;
     const TOTAL_CART_TAX = 0.05;
@@ -81,4 +90,4 @@ const clearLocalShoppingOrder = (cart) => {
 }
 
 
-export {getCartTotal,  addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
+export { getNumberOfCartItems,  getCartTotal,  addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
