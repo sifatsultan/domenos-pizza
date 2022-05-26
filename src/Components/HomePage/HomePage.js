@@ -3,27 +3,24 @@ import './HomePage.css'
 import dummyData from '../../dummyData/foods';
 import { useState } from 'react';
 import FoodItemBlock from '../FoodItemBlock/FoodItemBlock';
+import { getNumberOfCartItems } from '../../Database';
+import Header from '../Header/Header';
 
 
 const HomePage = () => {
     const [foodItem] = useState(dummyData);
     const [category, setCategory] = useState('vegeterian');
+    const [cartItemCount, setCartItemCount] = useState(getNumberOfCartItems())
 
     const handleAddToCart = () => {
-        console.log('I have been clicked');
+        setCartItemCount(getNumberOfCartItems());
     }
     
     return (
         <div>
-            <div className="d-flex align-items-center justify-content-center flex-column homepage-banner">
-                <div className="p-2">
-                    <h1 className='banner-title'>Yummy and delicious pizzas to delight you!</h1>
-                </div>
-                <div className="p-2">
-                    <input className='search-food-item' type="text" placeholder='Search Food Items' />
-                    <button className='btn-search' >Search</button>
-                </div>
-            </div>
+            
+            <Header numberOfCartItems={cartItemCount}></Header>
+
 
             <div>
                 <ul className="nav justify-content-center menu-type">

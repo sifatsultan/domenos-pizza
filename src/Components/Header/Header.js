@@ -13,10 +13,10 @@ import { useEffect } from 'react';
 import { getNumberOfCartItems } from '../../Database';
 import { useState } from 'react';
 
-const Header = () => {
+const Header = ({numberOfCartItems}) => {
 
 
-    const [numberOfCartItems, setNumberOfCartItems] = useState(getNumberOfCartItems());
+    // const [numberOfCartItems, setNumberOfCartItems] = useState(getNumberOfCartItems());
 
     useEffect(() => {
         console.log(numberOfCartItems);

@@ -14,7 +14,6 @@ const FoodItemBlock = ({ food, addToCart }) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
         setOpen(true);
-        addToCart();
     }
     const handleClose = () => setOpen(false);
 
@@ -46,7 +45,7 @@ const FoodItemBlock = ({ food, addToCart }) => {
                                     </div>
                                 </div>
                                 <br />
-                                <button className='btn-add-to-cart' onClick={() => { addToDatabaseCart(food.id, quantity) }}><FontAwesomeIcon icon={faCartPlus} /> Add</button>
+                                <button className='btn-add-to-cart' onClick={() => { addToDatabaseCart(food.id, quantity); addToCart() }}><FontAwesomeIcon icon={faCartPlus} /> Add</button>
                             </div>
                             <div className="col-md-4">
                                 <img src={food.img} alt="" />
