@@ -16,3 +16,19 @@
 .food-item-block:hover{
     transform: scale(1.05);
 }
+
+
+.box-fooditem{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background-color: azure;
+    border: 2px solid #000;
+    box-shadow: 24;
+    padding: 4
+
+
+}
