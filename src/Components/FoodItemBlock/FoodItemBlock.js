@@ -2,9 +2,14 @@ import React from 'react';
 import './FoodItemBlock.css';
 import Modal from '@mui/material/Modal'
 import { Box } from '@mui/system';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import dummyData from '../../dummyData/foods';
+import { addToDatabaseCart } from '../../Database';
 
-const FoodItemBlock = ({food, addToCart }) => {
+
+const FoodItemBlock = ({ food, addToCart }) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -12,6 +17,10 @@ const FoodItemBlock = ({food, addToCart }) => {
         addToCart();
     }
     const handleClose = () => setOpen(false);
+
+
+    const [quantity, setQuantity] = useState(1);
+    const totalPrice = quantity * food.price;
 
     return (
 
@@ -21,10 +30,29 @@ const FoodItemBlock = ({food, addToCart }) => {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
+                aria-describedby="modal-modal-description">
                 <Box className="box-fooditem">
-                    <p>Hello</p>
+                    <div className='item-details'>
+                        <div className="row">
+                            <div className="col-md-8">
+                                <h1>{food.name}</h1>
+                                <p>{food.fullDescription}</p>
+                                <div className="d-flex flex-row">
+                                    <h1 className='item-price'>${totalPrice}</h1>
+                                    <div className='food-quantity'>
+                                        <span className='btn' onClick={() => setQuantity(quantity <= 1 ? 1 : quantity - 1)}>-</span>
+                                        <b>{quantity}</b>
+                                        <span className='btn' onClick={() => setQuantity(quantity >= 20 ? 20 : quantity + 1)}>+</span>
+                                    </div>
+                                </div>
+                                <br />
+                                <button className='btn-add-to-cart' onClick={() => { addToDatabaseCart(food.id, quantity) }}><FontAwesomeIcon icon={faCartPlus} /> Add</button>
+                            </div>
+                            <div className="col-md-4">
+                                <img src={food.img} alt="" />
+                            </div>
+                        </div>
+                    </div>
                 </Box>
 
             </Modal>
