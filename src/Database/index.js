@@ -43,22 +43,23 @@ const addToDatabaseCart = (key, count) => {
 
 const getNumberOfCartItems = () => {
     let currentCart = getDatabaseCart();
-    if(currentCart == null)
+    if (currentCart == null)
         return 0
-    else{
-        return currentCart.length;
+    else {
+        return currentCart
+            .reduce((previousValue, currentValue) => previousValue + currentValue.count, 0);
     }
 }
 
-const getCartTotal = () =>{
+const getCartTotal = () => {
     const TOTAL_CART_SHIPPING = 15.00;
     const TOTAL_CART_TAX = 0.05;
     let currentCart = getDatabaseCart();
-    
-    
+
+
     var subtotal = 0;
-    currentCart.map(c =>{
-        var item = dummyData.find(f=> f.id.toString() === c.key)
+    currentCart.map(c => {
+        var item = dummyData.find(f => f.id.toString() === c.key)
         subtotal += c.count * item.price
     })
 
@@ -78,7 +79,7 @@ const removeFromDatabaseCart = key => {
     const currentCart = getDatabaseCart();
     var itemToDelete = currentCart.find((x) => x.key.toString() === key)
     var index = currentCart.indexOf(itemToDelete)
-    if(index > -1){
+    if (index > -1) {
         currentCart.splice(index, 1)
     }
     console.log(currentCart);
@@ -90,4 +91,4 @@ const clearLocalShoppingOrder = (cart) => {
 }
 
 
-export { getNumberOfCartItems,  getCartTotal,  addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
+export { getNumberOfCartItems, getCartTotal, addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
