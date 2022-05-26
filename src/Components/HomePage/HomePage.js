@@ -21,6 +21,12 @@ const HomePage = () => {
             
             <Header numberOfCartItems={cartItemCount}></Header>
 
+            {/* Display Cart Items */}
+
+            <div>
+                
+            </div>
+
 
             <div>
                 <ul className="nav justify-content-center menu-type">
