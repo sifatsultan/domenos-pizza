@@ -94,12 +94,11 @@ const getCartTotal = () => {
 
 const removeFromDatabaseCart = key => {
     const currentCart = getDatabaseCart();
-    var itemToDelete = currentCart.find((x) => x.key.toString() === key)
+    var itemToDelete = currentCart.find((x) => x.key === key)
     var index = currentCart.indexOf(itemToDelete)
     if (index > -1) {
         currentCart.splice(index, 1)
     }
-    console.log(currentCart);
     localStorage.setItem(getDataKey(), JSON.stringify(currentCart));
 }
 
