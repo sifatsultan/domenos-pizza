@@ -1,19 +1,15 @@
-.food-item-block{
+.cart-item-block{
     color: black;
-    width: 30%; 
-    height: 500px;
+    width: 80%; 
     margin: 10px 10px;
     padding: 20px;
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 0 35px -2px #48497926;
-    float: left;
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
-
-
-.food-item-block:hover{
+.cart-item-block:hover{
     transform: scale(1.05);
 }
 

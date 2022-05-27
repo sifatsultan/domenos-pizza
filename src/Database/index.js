@@ -1,5 +1,7 @@
 import dummyData from "../dummyData/foods";
 
+
+
 const getUser = () => {
     const existingUser = localStorage.getItem('userId');
     if (existingUser) {
@@ -15,6 +17,21 @@ const getUser = () => {
 const getDataKey = () => {
     const userId = getUser();
     return `moja-pizza/carts/${userId}`
+}
+
+const getCartFoodItems = () => {
+    const cartItems = getDatabaseCart();
+    return cartItems.map(item => {
+        var item = dummyData.find(f => f.id === item.key);
+        return {
+            id: item.id,
+            name: item.name,
+            img: item.img,
+            price: item.price,
+            shortDescription: item.shortDescription
+        }
+    })
+
 }
 
 
@@ -90,5 +107,4 @@ const clearLocalShoppingOrder = (cart) => {
     localStorage.removeItem(getDataKey());
 }
 
-
-export { getNumberOfCartItems, getCartTotal, addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
+export {getCartFoodItems, getNumberOfCartItems, getCartTotal, addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };

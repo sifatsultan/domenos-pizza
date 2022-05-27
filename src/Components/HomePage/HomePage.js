@@ -3,29 +3,68 @@ import './HomePage.css'
 import dummyData from '../../dummyData/foods';
 import { useState } from 'react';
 import FoodItemBlock from '../FoodItemBlock/FoodItemBlock';
-import { getNumberOfCartItems } from '../../Database';
+import { getCartFoodItems, getNumberOfCartItems, removeFromDatabaseCart } from '../../Database';
+import { Drawer } from '@mui/material';
+import Badge from '@mui/material/Badge';
+import { IconButton } from '@mui/material';
+import MailIcon from '@mui/icons-material/Mail';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Header from '../Header/Header';
+import CartItemBlock from '../CartItemBlock/CartItemBlock';
 
 
 const HomePage = () => {
     const [foodItem] = useState(dummyData);
+    const cartFoodItems = getCartFoodItems();
     const [category, setCategory] = useState('vegeterian');
     const [cartItemCount, setCartItemCount] = useState(getNumberOfCartItems())
+    const [openCart, setOpenCart] = useState(false)
 
     const handleAddToCart = () => {
         setCartItemCount(getNumberOfCartItems());
     }
-    
+
+    const handleRemoveFromCart = (foodId) => {
+        removeFromDatabaseCart(foodId);
+        setCartItemCount(getNumberOfCartItems());
+    }
+
+    const handleOpenCart = () => {
+        setOpenCart(true);
+    }
+
+    const handleCloseCart = () => {
+        setOpenCart(false)
+    }
+
     return (
         <div>
-            
-            <Header numberOfCartItems={cartItemCount}></Header>
 
-            {/* Display Cart Items */}
-
-            <div>
-                
+            <div className='badge-shoppingcart'>
+                <IconButton onClick={handleOpenCart}>
+                    <Badge badgeContent={cartItemCount} color="error">
+                        <ShoppingCartIcon color="action" />
+                    </Badge>
+                </IconButton>
             </div>
+
+
+            <Drawer open={openCart} onClose={handleCloseCart}>
+                <div className='food-items'>
+                    {
+                        cartFoodItems.map((food) => {
+                            return (
+                                <CartItemBlock
+                                    key={food.id}
+                                    food={food}
+                                    addToCart={handleAddToCart}
+                                    removeFromCart={() => handleRemoveFromCart(food.id)} />
+                            )
+                        })
+                    }
+
+                </div>
+            </Drawer>
 
 
             <div>
@@ -40,7 +79,7 @@ const HomePage = () => {
 
             </div>
 
-            <div className='food-items'>
+            <div>
                 {
                     foodItem.map((food) => {
                         return (

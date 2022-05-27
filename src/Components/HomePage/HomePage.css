@@ -1,33 +1,46 @@
-.homepage-banner{
+.homepage-banner {
     background-image: url('../../Images/bannerbackground1.jpg');
-    height:80vh;
-    background-size:cover;
+    height: 80vh;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
 }
-.banner-title{
+
+.badge-shoppingcart {
+    position: fixed;
+    z-index: 100;
+    right: 20px;
+    top: 140px;
+}
+
+.banner-title {
     text-align: center;
     color: #ffffff;
 }
-.search-food-item{
+
+.search-food-item {
     padding: 8px 30px;
     border-radius: 30px;
     text-align: left;
 }
-.btn-search{
+
+.btn-search {
     margin-left: -50px;
     padding: 10px 20px;
     color: white;
     background-color: #E51A4B;
     border-radius: 50px;
 }
-.menu-type{
+
+.menu-type {
     margin: 20px 20px 40px 20px;
 }
-.nav-link{
+
+.nav-link {
     cursor: pointer;
 }
-.active{
+
+.active {
     cursor: pointer;
     color: #E51A4B;
     text-decoration: underline;
