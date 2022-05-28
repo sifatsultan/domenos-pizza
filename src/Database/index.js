@@ -21,10 +21,11 @@ const getDataKey = () => {
 
 const getCartFoodItems = () => {
     const cartItems = getDatabaseCart();
-    return cartItems.map(item => {
-        var item = dummyData.find(f => f.id === item.key);
+    return cartItems.map(food => {
+        var item = dummyData.find(f => f.id === food.key);
         return {
             id: item.id,
+            qty: food.count,
             name: item.name,
             img: item.img,
             price: item.price,
@@ -73,7 +74,8 @@ const getCartTotal = () => {
     const TOTAL_CART_TAX = 0.05;
     let currentCart = getDatabaseCart();
 
-
+    if(currentCart == null) return
+        
     var subtotal = 0;
     currentCart.map(c => {
         var item = dummyData.find(f => f.id.toString() === c.key)

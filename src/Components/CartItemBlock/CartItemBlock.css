@@ -1,40 +1,29 @@
-.cart-item-block{
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+.cart-item-block {
     color: black;
-    width: 80%; 
-    margin: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+    flex-direction: row;
     padding: 20px;
-    text-align: center;
     border-radius: 10px;
     box-shadow: 0 0 35px -2px #48497926;
-    cursor: pointer;
 }
 
 
+.cart-item-img-container{
+    width: 100px;
+}
 
+.cart-item-img {
+    display: block;
+    width: 100%;
+}
 
-.item-details{
-    margin: 5% 30% 2% 10%;
-}
-.btn-add-to-cart{
-    color: white;
-    background-color: #E51A4B;
-    padding: 8px 20px;
-    border-radius: 30px;
-    border-color: #E51A4B;
-}
-.btn-add-to-cart:hover {
-    color: #fff;
-    background-color: #c82333;
-    border-color: #bd2130;
-    box-shadow: 0 0 0 #c82333;
-  }
-.item-price{
-    width: 130px;
-}
-.food-quantity{
-    margin: 0px 5px;
-    padding: 0px 10px;
-    border: 1px solid black;
-    border-radius: 50px;
-    line-height: 50px;
+.cart-item-name{
+    font-weight: bold;
 }

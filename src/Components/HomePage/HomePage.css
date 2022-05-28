@@ -41,7 +41,19 @@
 }
 
 .active {
-    cursor: pointer;
+    cursor: pointe  r;
     color: #E51A4B;
     text-decoration: underline;
+}
+
+
+
+.cart-container{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.cart-title{
+    padding: 10px;
+    text-align: center;
 }
