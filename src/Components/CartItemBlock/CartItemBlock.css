@@ -6,6 +6,7 @@
 .cart-item-block {
     color: black;
     display: flex;
+    width: 400px;
     justify-content: space-between;
     column-gap: 20px;
     flex-direction: row;
@@ -14,6 +15,10 @@
     box-shadow: 0 0 35px -2px #48497926;
 }
 
+.cart-item-container{
+    display: flex;
+    align-items: center;
+}
 
 .cart-item-img-container{
     width: 100px;
@@ -25,5 +30,7 @@
 }
 
 .cart-item-name{
-    font-weight: bold;
+    width: 100px;
+    display: block;
+
 }
