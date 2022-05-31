@@ -1,5 +1,7 @@
 import dummyData from "../dummyData/foods";
 
+
+
 const getUser = () => {
     const existingUser = localStorage.getItem('userId');
     if (existingUser) {
@@ -15,6 +17,22 @@ const getUser = () => {
 const getDataKey = () => {
     const userId = getUser();
     return `moja-pizza/carts/${userId}`
+}
+
+const getCartFoodItems = () => {
+    const cartItems = getDatabaseCart();
+    return cartItems.map(food => {
+        var item = dummyData.find(f => f.id === food.key);
+        return {
+            id: item.id,
+            qty: food.count,
+            name: item.name,
+            img: item.img,
+            price: item.price,
+            shortDescription: item.shortDescription
+        }
+    })
+
 }
 
 
@@ -56,7 +74,8 @@ const getCartTotal = () => {
     const TOTAL_CART_TAX = 0.05;
     let currentCart = getDatabaseCart();
 
-
+    if(currentCart == null) return
+        
     var subtotal = 0;
     currentCart.map(c => {
         var item = dummyData.find(f => f.id.toString() === c.key)
@@ -77,12 +96,11 @@ const getCartTotal = () => {
 
 const removeFromDatabaseCart = key => {
     const currentCart = getDatabaseCart();
-    var itemToDelete = currentCart.find((x) => x.key.toString() === key)
+    var itemToDelete = currentCart.find((x) => x.key === key)
     var index = currentCart.indexOf(itemToDelete)
     if (index > -1) {
         currentCart.splice(index, 1)
     }
-    console.log(currentCart);
     localStorage.setItem(getDataKey(), JSON.stringify(currentCart));
 }
 
@@ -90,5 +108,4 @@ const clearLocalShoppingOrder = (cart) => {
     localStorage.removeItem(getDataKey());
 }
 
-
-export { getNumberOfCartItems, getCartTotal, addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
+export {getCartFoodItems, getNumberOfCartItems, getCartTotal, addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };

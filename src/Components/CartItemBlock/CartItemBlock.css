@@ -1,0 +1,36 @@
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+.cart-item-block {
+    color: black;
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+    column-gap: 20px;
+    flex-direction: row;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 35px -2px #48497926;
+}
+
+.cart-item-container{
+    display: flex;
+    align-items: center;
+}
+
+.cart-item-img-container{
+    width: 100px;
+}
+
+.cart-item-img {
+    display: block;
+    width: 100%;
+}
+
+.cart-item-name{
+    width: 100px;
+    display: block;
+
+}

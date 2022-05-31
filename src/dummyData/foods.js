@@ -1,4 +1,4 @@
-const dummyData =[
+const dummyData = [
     {   
         "id" : 1,
         "category":"vegeterian",
@@ -8,7 +8,7 @@ const dummyData =[
         "shortDescription" : "Quality food at low price.",
         "fullDescription" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.  "
     },
-    {   
+    {      
         "id" : 2,
         "category":"vegeterian",
         "name" : "Vegan Cheese Lovers",
