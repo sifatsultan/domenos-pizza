@@ -38,7 +38,7 @@ const Header = ({numberOfCartItems}) => {
                 <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul className="navbar-nav nav_links">
                         <li className="nav-item active">
-                            <a className="nav-link" href="/login">Login <span className="sr-only">(current)</span></a>
+                            <a className="nav-link" href="/login">Login to portal <span className="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item active">
                             <a href="/login"><button className='btn-login'>Sign Up</button></a>
