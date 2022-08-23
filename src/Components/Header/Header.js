@@ -23,7 +23,7 @@ const Header = ({numberOfCartItems}) => {
     })
 
 
-
+const mySecret = process.env['GIT_URL']
     return (
         <div>
             {/* <div>
