@@ -35,8 +35,19 @@ const getCartFoodItems = () => {
 
 }
 
+const getFoodItemCount = (foodID) => {
+    
+    var currentCart = getDatabaseCart();
+    var targetItem = currentCart.filter(c => c.key === foodID)[0];
 
-// push to local storage: a temporary place for database
+    if (targetItem != null) {
+        return targetItem.count;
+    } else {
+        return 0
+    }
+}
+
+
 const getDatabaseCart = () => {
     const dataKey = getDataKey();
     const data = localStorage.getItem(dataKey) || "[]";
@@ -69,13 +80,14 @@ const getNumberOfCartItems = () => {
     }
 }
 
+
 const getCartTotal = () => {
     const TOTAL_CART_SHIPPING = 15.00;
     const TOTAL_CART_TAX = 0.05;
     let currentCart = getDatabaseCart();
 
-    if(currentCart == null) return
-        
+    if (currentCart == null) return
+
     var subtotal = 0;
     currentCart.map(c => {
         var item = dummyData.find(f => f.id.toString() === c.key)
@@ -108,4 +120,4 @@ const clearLocalShoppingOrder = (cart) => {
     localStorage.removeItem(getDataKey());
 }
 
-export {getCartFoodItems, getNumberOfCartItems, getCartTotal, addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder };
+export { getCartFoodItems, getNumberOfCartItems, getCartTotal, addToDatabaseCart, getDatabaseCart, removeFromDatabaseCart, clearLocalShoppingOrder, getFoodItemCount};

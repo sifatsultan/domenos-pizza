@@ -8,16 +8,16 @@ import { ButtonGroup } from '@mui/material';
 import { Button } from '@mui/material';
 
 
-const CartItemBlock = ({ food, removeFromCart }) => {
+const CartItemBlock = ({ food, removeFromCart, incrementProductQty, decrementProductQty }) => {
 
     return (
         <div className='container'>
             <div className="cart-item-block">
                 <div className='cart-item-container'>
                     <ButtonGroup orientation='vertical' size="small" aria-label="vertical small outlined button group">
-                        <Button onClick={() => { console.log('Hello') }}>+</Button>
+                        <Button onClick={incrementProductQty}>+</Button>
                         <Button disabled>{food.qty}</Button>
-                        <Button onClick={() => { console.log('Bhai') }}>-</Button>
+                        <Button onClick={decrementProductQty}>-</Button>
                     </ButtonGroup>
                 </div>
                 <div className='cart-item-img-container cart-item-container'>

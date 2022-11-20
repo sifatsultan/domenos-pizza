@@ -3,27 +3,48 @@ import './HomePage.css'
 import dummyData from '../../dummyData/foods';
 import { useState } from 'react';
 import FoodItemBlock from '../FoodItemBlock/FoodItemBlock';
-import { getCartFoodItems, getNumberOfCartItems, removeFromDatabaseCart } from '../../Database';
-import { Drawer, touchRippleClasses } from '@mui/material';
+import { addToDatabaseCart, getCartFoodItems, getFoodItemCount, getNumberOfCartItems, removeFromDatabaseCart } from '../../Database';
+import { Drawer } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import { IconButton } from '@mui/material';
-import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CartItemBlock from '../CartItemBlock/CartItemBlock';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-// import { getCartTotal } from '../../Database';
-import { useEffect } from 'react';
 
 
 
 const HomePage = () => {
     const [foodItem] = useState(dummyData);
-    const cartFoodItems = getCartFoodItems();
+
+    const [cartFoodItems, setCartFoodItems] = useState(getCartFoodItems())
     const [category, setCategory] = useState('vegeterian');
+    const [itemCount, setItemCount] = useState(0);
     const [cartItemCount, setCartItemCount] = useState(getNumberOfCartItems())
     const [openCart, setOpenCart] = useState(false)
     // const [cartTotal, setCartTotal] = useState(getCartTotal)
+
+
+
+    const handleIncrementProductQuantity = (foodId) => {
+        console.log("handleIncrementQuantity is triggered");
+        console.log("foodID: ", foodId);
+
+        // update database
+        var foodQty = getFoodItemCount(foodId);
+        console.log('foodID: ', foodId, ' quantity: ', foodQty);
+        foodQty = foodQty + 1;    
+        addToDatabaseCart(foodId, foodQty);
+        
+        //update state
+        setCartFoodItems(getCartFoodItems());
+    }
+
+
+    const handleDecrementProductQuantity = () => {
+        console.log("handleDecrementQuantity is triggered");
+    }
+
 
 
     const handleAddToCart = () => {
@@ -46,6 +67,7 @@ const HomePage = () => {
     return (
         <div>
 
+            {/* Shopping cart icon */}
             <div className='badge-shoppingcart'>
                 <IconButton onClick={handleOpenCart}>
                     <Badge badgeContent={cartItemCount} color="error">
@@ -56,7 +78,7 @@ const HomePage = () => {
 
 
 
-            {/* cart item */}
+            {/* Display cart items in the floating side menu */}
             <Drawer open={openCart} onClose={handleCloseCart}>
                 <div className='cart-container'>
                     <h4 className='cart-title'>Cart Items</h4>
@@ -70,6 +92,8 @@ const HomePage = () => {
                                                 key={food.id}
                                                 food={food}
                                                 addToCart={handleAddToCart}
+                                                incrementProductQty={() =>handleIncrementProductQuantity(food.id)}
+                                                decrementProductQty={() => handleDecrementProductQuantity(food.id)}
                                                 removeFromCart={() => handleRemoveFromCart(food.id)} />
                                         )
                                     })
@@ -90,9 +114,10 @@ const HomePage = () => {
 
                 </div>
             </Drawer>
-            {/* cart item */}
 
+            
 
+            {/* Display pizza category */}
             <div>
                 <ul className="nav justify-content-center menu-type">
                     <li onClick={() => setCategory('vegeterian')} className="nav-item">
@@ -105,6 +130,8 @@ const HomePage = () => {
 
             </div>
 
+
+            {/* Display pizza items */}
             <div>
                 {
                     foodItem.map((food) => {
