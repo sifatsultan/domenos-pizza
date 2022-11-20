@@ -5,7 +5,6 @@ import { Box } from '@mui/system';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import dummyData from '../../dummyData/foods';
 import { addToDatabaseCart } from '../../Database';
 
 
